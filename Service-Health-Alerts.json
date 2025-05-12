@@ -1,0 +1,95 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.35.1.17967",
+      "templateHash": "15982316633042905979"
+    }
+  },
+  "parameters": {
+    "actionGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name der Action Group"
+      }
+    },
+    "emailAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "E-Mail-Adresse des Empfaengers"
+      }
+    },
+    "alertRuleName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name der Alert Rule"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Standort der Ressourcen"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Insights/actionGroups",
+      "apiVersion": "2022-06-15",
+      "name": "[parameters('actionGroupName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "groupShortName": "SvcHlth",
+        "enabled": true,
+        "emailReceivers": [
+          {
+            "name": "PrimaryEmail",
+            "emailAddress": "[parameters('emailAddress')]",
+            "status": "Enabled"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Insights/metricAlerts",
+      "apiVersion": "2018-03-01",
+      "name": "[parameters('alertRuleName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "description": "Benachrichtigung bei Azure-Dienstausfaellen",
+        "severity": 3,
+        "enabled": true,
+        "scopes": [
+          "[subscription().id]"
+        ],
+        "evaluationFrequency": "PT1M",
+        "windowSize": "PT5M",
+        "criteria": {
+          "@odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+          "allOf": [
+            {
+              "name": "ServiceHealthEvent",
+              "metricName": "ServiceHealthEvents",
+              "metricNamespace": "microsoft.insights/serviceHealth",
+              "operator": "GreaterThan",
+              "threshold": 0,
+              "timeAggregation": "Total"
+            }
+          ]
+        },
+        "actions": [
+          {
+            "actionGroupId": "[resourceId('Microsoft.Insights/actionGroups', parameters('actionGroupName'))]"
+          }
+        ],
+        "autoMitigate": false
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Insights/actionGroups', parameters('actionGroupName'))]"
+      ]
+    }
+  ]
+}
