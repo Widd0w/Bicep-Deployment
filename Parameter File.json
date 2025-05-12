@@ -1,0 +1,14 @@
+{
+  "actionGroupName": {
+    "value": "svcHealthActionGroup"
+  },
+  "emailAddress": {
+    "value": "Conrad.Wasser@utilitas.net"
+  },
+  "alertRuleName": {
+    "value": "serviceHealthAlertRule"
+  },
+  "location": {
+    "value": "westeurope"
+  }
+}
