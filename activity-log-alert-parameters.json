@@ -1,0 +1,8 @@
+{
+  "activityLogAlerts_name": {
+    "value": "ServiceHealthActivityLogAlert"
+  },
+  "actionGroupResourceId": {
+    "value": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/microsoft.insights/actionGroups/SubHealth"
+  }
+}

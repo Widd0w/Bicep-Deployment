@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "actionGroups_name": {
+      "type": "string"
+    },
+    "emailAddress": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Insights/actionGroups",
+      "apiVersion": "2020-10-01",
+      "name": "[parameters('actionGroups_name')]",
+      "location": "Global",
+      "properties": {
+        "groupShortName": "[parameters('actionGroups_name')]",
+        "enabled": true,
+        "emailReceivers": [
+          {
+            "name": "[parameters('actionGroups_name')]",
+            "emailAddress": "[parameters('emailAddress')]"
+          }
+        ],
+        "smsReceivers": [],
+        "webhookReceivers": []
+      }
+    }
+  ]
+}
