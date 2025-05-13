@@ -3,6 +3,6 @@
     "value": "ServiceHealthActivityLogAlert"
   },
   "actionGroupResourceId": {
-    "value": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/microsoft.insights/actionGroups/SubHealth"
+    "value": "/subscriptions/68afb24f-22d3-45fa-80a2-610b8e1a321b/resourceGroups/AMBA-Resource-Group/providers/microsoft.insights/actionGroups/SubHealth"
   }
 }
