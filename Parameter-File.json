@@ -1,14 +1,12 @@
 {
-  "actionGroupName": {
-    "value": "svcHealthActionGroup"
-  },
-  "emailAddress": {
-    "value": "Conrad.Wasser@utilitas.net"
-  },
-  "alertRuleName": {
-    "value": "serviceHealthAlertRule"
-  },
-  "location": {
-    "value": "germanywestcentral"
+    "actionGroups_name": {
+      "value": "svcHealthActionGroup"
+    },
+    "activityLogAlerts_name": {
+      "value": "serviceHealthAlertRule"
+    },
+    "emailAddress": {
+      "value": "Conrad.Wasser@utilitas.net"
+    }
   }
-}
+  
