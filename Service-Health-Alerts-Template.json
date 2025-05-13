@@ -46,30 +46,17 @@
           "[variables('alertScope')]"
         ],
         "condition": {
-          "allOf": [
-            {
-              "field": "category",
-              "equals": "ServiceHealth"
-            },
-            {
-              "field": "properties.incidentType",
-              "equals": "Incident"
-            },
-			{
-			   "field": "properties.impactedServices[*].ServiceName",
-			   "containsAny": [
-                  "SQL Database",
-                  "SQL Managed Instance"
-               ]
-			},
-            {
-				"field": "properties.impactedServices[*].ImpactedRegions[*].RegionName",
-                "containsAny": [
-                   "Australia Central"
-                ]
-            }
-          ]
-        },
+  "allOf": [
+    {
+      "field": "category",
+      "equals": "ServiceHealth"
+    },
+    {
+      "field": "properties.incidentType",
+      "equals": "Incident"
+    }
+  ]
+},
         "actions": {
           "actionGroups": [
             {
